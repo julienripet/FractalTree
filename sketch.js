@@ -44,7 +44,7 @@ class Tree {
         this.treeTopX = this.baseTreeX;
         stroke(255,0,0)
         line(this.baseTreeX,this.baseTreeY,this.treeTopX,this.treeTopY)
-        let branches = new Branching(this.treeTopX,this.treeTopY,this.height*0.7,10,this.brancheGenerations)
+        let branches = new Branching(this.treeTopX,this.treeTopY,this.height*0.7,0.8,this.brancheGenerations)
         branches.drawBranche();
     }
 
@@ -60,19 +60,19 @@ class Branching {
         this.baseBrancheY = treeTopY;
         this.myLenght = someLenght ;
         this.myRotation = rotation;
-        this.highEndBranchX = this.baseBrancheX + this.myLenght;
-        this.highEndBranchY = this.baseBrancheY + this.myLenght;
+        this.highEndBranchX = round(this.baseBrancheX + ( this.myLenght * sin(this.myRotation)));
+        this.highEndBranchY = round(this.baseBrancheY + ( this.myLenght * cos(this.myRotation)));
     }
 
     drawBranche(){
-        this.myLenght = Math.floor(this.myLenght * 0.7);
-        this.myRotation = Math.floor(this.myRotation * 1.6);
+        this.myLenght = this.myLenght * 0.7;
+        this.myRotation = this.myRotation * 1.5;
 
         //push();
         stroke(255-color,color,0)
         color = color - 50;
         
-        translate(this.highEndBranchX - this.baseBrancheX,this.myRotation)
+        //translate(this.highEndBranchX - this.baseBrancheX,this.myRotation)
         //rotate(this.myRotation);
         rect(200+this.myRotation,200+this.myRotation,50,50)
         console.log(this.baseBrancheX,this.baseBrancheY, this.highEndBranchX, this.highEndBranchY)
@@ -82,6 +82,7 @@ class Branching {
             console.log("itération numéro : "+(5-this.brancheGenerations))
             this.brancheGenerations--;
             let child = childrenArray[this.brancheGenerations] =  new Branching(this.highEndBranchX,this.highEndBranchY,this.myLenght,this.myRotation,this.brancheGenerations);
+            let negchild = new Branching(this.highEndBranchX,this.highEndBranchY,this.myLenght,this.myRotation,this.brancheGenerations);
             console.log(child)
             child.drawBranche();
         }
