@@ -66,16 +66,15 @@ class Branching {
 
     drawBranche(){
         this.myLenght = Math.floor(this.myLenght * 0.7);
-        this.myRotation = Math.floor(this.myRotation * 2.5);
+        this.myRotation = Math.floor(this.myRotation * 1.6);
 
         //push();
         stroke(255-color,color,0)
         color = color - 50;
         
-        //translate(this.baseBrancheX,this.baseBrancheY)
-        //rotate(Math.PI/3);
+        translate(this.highEndBranchX - this.baseBrancheX,this.myRotation)
         //rotate(this.myRotation);
-        rect(200,200,50,50)
+        rect(200+this.myRotation,200+this.myRotation,50,50)
         console.log(this.baseBrancheX,this.baseBrancheY, this.highEndBranchX, this.highEndBranchY)
         line(this.baseBrancheX,this.baseBrancheY, this.highEndBranchX, this.highEndBranchY)
         //pop();
